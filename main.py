@@ -35,7 +35,7 @@ def sniff(target_ip: str):
     return p
 
 try:
-    p = sniff()
+    main()
     print(p.summary())
 except KeyboardInterrupt:
     print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
