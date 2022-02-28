@@ -22,11 +22,12 @@ def NeTfUcKeR():
     tag = Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.GREEN + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.GREEN + "r" + Fore.WHITE + "]"
     return tag
 
-target_ip = input(f"{NeTfUcKeR()} Who you wanna fuck up their connection? > ")
-gateway_ip = input(f"{NeTfUcKeR()} Gateway IP address? > ")
+target_ip = input(f"{NeTfUcKeR()} Who we need info from > ")
+#gateway_ip = input(f"{NeTfUcKeR()} Gateway IP address? > ")
 
 try:
-    scapy.sniff(filter=target_ip)
+    hmm = scapy.sniff(filter=f"{target_ip}")
+    print(hmm)
 except KeyboardInterrupt:
     print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
     print(f"{NeTfUcKeR()} Arp Spoof Stopped")
