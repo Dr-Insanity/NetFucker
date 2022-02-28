@@ -26,7 +26,7 @@ target_ip = input(f"{NeTfUcKeR()} Who we need info from > ")
 #gateway_ip = input(f"{NeTfUcKeR()} Gateway IP address? > ")
 
 try:
-    hmm = scapy.sniff(filter=f"{target_ip}")
+    hmm = scapy.sniff(filter=f"{str(target_ip)}")
     print(hmm)
 except KeyboardInterrupt:
     print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
