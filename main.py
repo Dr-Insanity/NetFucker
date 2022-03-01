@@ -1,3 +1,4 @@
+from turtle import delay
 import scapy.all as scapy
 from scapy.all import IP
 from colorama import init, Fore, Back, Style
@@ -57,23 +58,26 @@ def main():
     blocked_host = input(f"{NeTfUcKeR()} OK, then what IPv4 address shouldn't they be visiting? (example: The IPv4 address of youtube.com)> ")
     print(f"{NeTfUcKeR()} > Filter set.")
     print_DiscoveringStage()
-    print(f"{NeTfUcKeR()} Checking if given target IPv4 is currently giving away their existence. Please wait...")
     #gateway_ip = input(f"{NeTfUcKeR()} Gateway IP address? > ")
     p = sniff(target_ip=target_ip, blocked_host=blocked_host)
 
 def sniff(target_ip: str, blocked_host: str):
-    print(f"{NeTfUcKeR()} Monitoring our target like a baby phone")
-    #hmm = scapy.sniff(prn=lambda x:x.sprintf("{IP:%IP.src% -> %IP.dst%\n}{Raw:%Raw.load%\n}"))
-    hmm = scapy.sniff(filter=f"ip and host {target_ip}", count=1)
-    if len(hmm) == 0:
-        NetFucker.Stealth.ARPScan(target_ip, blocked_host)
-    #print(hmm[0].getlayer().dst)
-    print(hmm.summary())
+    try:
+        print(f"{NeTfUcKeR()} Checking if given target IPv4 is currently giving away their existence. Please wait...\n{NeTfUcKeR()} This may take a while...")
+        hmm = scapy.sniff(filter=f"src host {target_ip} and dst host {blocked_host}", count=1)
+        #hmm = scapy.sniff(filter=f"src host {target_ip}", count=1)
+        if len(hmm) == 0:
+            NetFucker.Stealth.ARPScan(target_ip, blocked_host)
+    except KeyboardInterrupt:
+        print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
+        print(f"{NeTfUcKeR()} See ya again, eh?")
+        quit()
+    return hmm[0]
 
 try:
     main()
 
 except KeyboardInterrupt:
     print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
-    print(f"{NeTfUcKeR()} Arp Spoof Stopped")
+    print(f"{NeTfUcKeR()} See ya again, eh?")
     quit()
