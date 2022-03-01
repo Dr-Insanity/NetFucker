@@ -53,7 +53,7 @@ def sniff(target_ip: str, blocked_host: str):
     #hmm = scapy.sniff(prn=lambda x:x.sprintf("{IP:%IP.src% -> %IP.dst%\n}{Raw:%Raw.load%\n}"))
     hmm = scapy.sniff(filter=f"host {target_ip}", count=1)
     if len(hmm) == 0:
-        NetFucker.Stealth.ARPScan()
+        NetFucker.Stealth.ARPScan(target_ip, blocked_host)
     #print(hmm[0].getlayer().dst)
     print(hmm.summary())
 
