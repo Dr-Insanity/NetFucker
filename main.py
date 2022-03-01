@@ -22,14 +22,14 @@ class NetFucker:
             # Let's appear "legit" by sending ARP requests 
             # less frequently, you know, like every other device?
             # WAIT at least a minute
-            def break_wait_pattern():
+            def break_wait_pattern() -> int:
                 """## To maintain absolute stealth, we don't want to let our sysadmin notice a pattern in our scans.\n## Therefore, we don't neccessarrily wait 60 seconds.. but > 60 seconds (sometimes more)"""
-                return random.uniform(60.0, 150.0)
+                return random.randint(60, 150)
 
             t = break_wait_pattern()
-            countdown(t)
             time.sleep(t)
-
+            countdown(t)
+            print(Fore.GREEN + "=====================================================================")
             sniff(target_ip, blocked_host)
     class Appearance:
         def printBanner():
@@ -48,7 +48,7 @@ def NeTfUcKeR():
     return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
 
 def print_DiscoveringStage():
-    print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + "D" + Fore.RED + "I" + Fore.YELLOW + "S" + Fore.LIGHTGREEN_EX + "C" + Fore.MAGENTA + "O" + Fore.CYAN + "V" + Fore.BLUE + "E" + Fore.RED + "R" + Fore.YELLOW + "Y" + Fore.CYAN + "S" + Fore.BLUE + "T" + Fore.RED + "A" + Fore.YELLOW + "G" + Fore.LIGHTGREEN_EX + "E" + Fore.GREEN + "]" + Fore.GREEN + "==================")
+    print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " D " + Fore.RED + "I " + Fore.YELLOW + "S " + Fore.LIGHTGREEN_EX + "C " + Fore.MAGENTA + "O " + Fore.CYAN + "V " + Fore.BLUE + "E " + Fore.RED + "R " + Fore.YELLOW + "Y    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
 
 def main():
     NetFucker.Appearance.printBanner()
