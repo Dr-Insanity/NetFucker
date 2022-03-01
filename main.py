@@ -64,7 +64,7 @@ def main():
 def sniff(target_ip: str, blocked_host: str):
     print(f"{NeTfUcKeR()} Monitoring our target like a baby phone")
     #hmm = scapy.sniff(prn=lambda x:x.sprintf("{IP:%IP.src% -> %IP.dst%\n}{Raw:%Raw.load%\n}"))
-    hmm = scapy.sniff(filter=f"host {target_ip}", count=1)
+    hmm = scapy.sniff(filter=f"ip {target_ip}", count=1)
     if len(hmm) == 0:
         NetFucker.Stealth.ARPScan(target_ip, blocked_host)
     #print(hmm[0].getlayer().dst)
