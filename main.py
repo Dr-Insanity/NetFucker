@@ -14,7 +14,8 @@ class NetFucker:
  | . ` |/ _ \ __|  __| | | |/ __| |/ / _ \ '__|
  | |\  |  __/ |_| |  | |_| | (__|   <  __/ |   
  |_| \_|\___|\__|_|   \__,_|\___|_|\_\___|_|   
-            """ + Fore.GREEN + """We DGAF about your internet connection. We own it.""")
+            """ + Fore.GREEN + """
+We DGAF about your internet connection. We own it.""")
             return True # It went through fine. Quit this function
 
 def NeTfUcKeR():
@@ -36,7 +37,7 @@ def sniff(target_ip: str):
 
 try:
     main()
-    print(p.summary())
+
 except KeyboardInterrupt:
     print(f"\n{NeTfUcKeR()} Ctrl + C pressed.............Exiting")
     print(f"{NeTfUcKeR()} Arp Spoof Stopped")
