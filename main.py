@@ -17,19 +17,19 @@ class NetFucker:
                     print(timer, end="\r")
                     time.sleep(1)
                     t -= 1
-
+                time.sleep(t)
+                return
             # MAINTAIN STEALTH!!! Wait before we cause noise for our sys admin here... 
             # Let's appear "legit" by sending ARP requests 
             # less frequently, you know, like every other device?
             # WAIT at least a minute
             def break_wait_pattern() -> int:
                 """## To maintain absolute stealth, we don't want to let our sysadmin notice a pattern in our scans.\n## Therefore, we don't neccessarrily wait 60 seconds.. but > 60 seconds (sometimes more)"""
-                return random.randint(60, 150)
+                return random.randint(60, 99)
 
             t = break_wait_pattern()
-            time.sleep(t)
             countdown(t)
-            print(Fore.GREEN + "=====================================================================")
+            print(Fore.GREEN + f"{NeTfUcKeR()} Stealth ARP ping performed. Relax! We look like normal people! B)", end="                            \n")
             sniff(target_ip, blocked_host)
     class Appearance:
         def printBanner():
