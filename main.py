@@ -72,17 +72,33 @@ We DGAF about your internet connection. We own it.""")
     class Vars:
         blocked_host = f""
         target_ip = f""
+        block_fb    = False
+        block_yt    = False
+        block_go    = False
+        block_twitch= False
+        block_      = False
 
+        class Facebook:
+            def IPs():
+                return "157.240.201.15"
 
-def Monitor_Target_traffic(packet: scapy.packet.Packet):
-    print("aaaaaa")
+def monitor_target_traffic(packet: scapy.packet.Packet):
     not_dst = 0
-    print_AttackingStage()
-    print(f"""{NeTfUcKeR} Ladies and Gentlemen, we found our sheep. Monitoring "{NetFucker.Vars.target_ip}" and making sure they will never reach {NetFucker.Vars.blocked_host}! . . .""")
+    dst = 0
+    def count_non_dst():
+        while True:
+            timer = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets with other destinations: " + Fore.GREEN + "{:02d}"
+            print(timer, end="\r")
+
+    counter = 0
+    counter += 1
     if IP in packet.layers():
-        if packet.get(IP) != NetFucker.Vars.blocked_host:
-            not_dst += 1
-            print(Fore.WHITE + f"Packets with other destinations: " + Fore.GREEN + f"{not_dst}", end="\r")
+        print(packet.getlayer(IP).dst, end="\r")
+        if packet.getlayer(IP).dst != NetFucker.Vars.blocked_host:
+            count_non_dst()
+        else:
+            dst += 1
+            print(Fore.WHITE + f"Packets to blocked host: " + Fore.GREEN + f"{not_dst}", end="\r")
 
     else:
         print(Fore.WHITE + f"Other packets with other destinations: " + Fore.GREEN + f"{not_dst}", end="\r")
@@ -96,7 +112,7 @@ def print_DiscoveringStage():
     print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " D " + Fore.RED + "I " + Fore.YELLOW + "S " + Fore.LIGHTGREEN_EX + "C " + Fore.MAGENTA + "O " + Fore.CYAN + "V " + Fore.BLUE + "E " + Fore.RED + "R " + Fore.YELLOW + "Y    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
 
 def print_AttackingStage():
-    print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " A " + Fore.RED + "T " + Fore.YELLOW + "T " + Fore.LIGHTGREEN_EX + "A " + Fore.MAGENTA + "C " + Fore.CYAN + "K " + Fore.BLUE + "I " + Fore.RED + "N " + Fore.YELLOW + "G    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
+    print("\n" + Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " A " + Fore.RED + "T " + Fore.YELLOW + "T " + Fore.LIGHTGREEN_EX + "A " + Fore.MAGENTA + "C " + Fore.CYAN + "K " + Fore.BLUE + "I " + Fore.RED + "N " + Fore.YELLOW + "G    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================", end="\r")
 
 def print_Important():
     print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " I " + Fore.RED + "M " + Fore.YELLOW + "P " + Fore.LIGHTGREEN_EX + "O " + Fore.MAGENTA + "R " + Fore.CYAN + "T " + Fore.BLUE + "A " + Fore.RED + "N " + Fore.YELLOW + "T " + Fore.GREEN + "]" + Fore.GREEN + "==================")
@@ -105,8 +121,12 @@ def main():
     NetFucker.Appearance.printBanner()
     ip_address = get_if_addr(conf.iface)
     print_Important()
-    print(Fore.LIGHTBLACK_EX + f"It's important to choose a target IP that is on the same subnet. (The Third Number of both your local IPv4 address)\nYour own local IPv4 addrress is " + Fore.WHITE + f"{ip_address}")
+    print(Fore.LIGHTWHITE_EX + "Note: " + Fore.LIGHTBLACK_EX + f"It's important to choose a target IP that is on the same subnet. (The Third Number of both your local IPv4 address)\nYour own local IPv4 addrress is " + Fore.WHITE + f"{ip_address}")
+    print(Fore.LIGHTWHITE_EX + "Note: " + Fore.LIGHTBLACK_EX + "I strongly recommend to open this program in " + Fore.WHITE + "Git Bash")
     print_Important()
+    if ip_address == "127.0.0.1":
+        print(f"{NeTfUcKeR()}{NetFucker.Appearance.wut()} " + Fore.RED + "OFFLINE! " + Fore.WHITE + f"You're not connected to any network. For this program to work, you need to have access to some network!\n{NeTfUcKeR()}{NetFucker.Appearance.wut()} Quitting!")
+        quit()
     target_ip = input(f"{NeTfUcKeR()}{NetFucker.Appearance.huh()} Who we gonna fuck up a connection for? (IPv4 address of local network device)> ")
     NetFucker.Vars.target_ip += target_ip
     print(f"{NeTfUcKeR()}{NetFucker.Appearance.hey()}  > Target set.")
@@ -118,7 +138,7 @@ def main():
 
 def main2(target_ip: str, blocked_host: str):
     print(f"{NeTfUcKeR()}{NetFucker.Appearance.hey()} Checking if given target IPv4 is currently giving away their existence. Please wait...\n{NeTfUcKeR()}{NetFucker.Appearance.hey()} This may take a while...")
-    hmm = sniff(filter=f"src host {target_ip}", prn=Monitor_Target_traffic)
+    hmm = sniff(prn=monitor_target_traffic, filter=f"src host {target_ip}")
     #print(hmm.summary())
     #print(hmm[0].layers())
 
