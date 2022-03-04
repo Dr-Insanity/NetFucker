@@ -94,22 +94,16 @@ def monitor_target_traffic(packet: scapy.packet.Packet):
     #    message = Text(app, text="Enter your name")
     #    app.display()
     def count_non_dst(t):
-        while t:
-            non_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
-            print(non_dst, end="\r\n")
-            t -= 1
+        non_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
+        print(non_dst, end="\r")
 
     def count_dst(t):
-        while t:
-            is_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets to blocked host: " + Fore.GREEN + "{:02d}".format(t)
-            print(is_dst, end="\r\n")
-            t -= 1
+        is_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets to blocked host: " + Fore.GREEN + "{:02d}".format(t)
+        print(is_dst, end="\r")
 
     def count_other_not_dst(t):
-        while t:
-            other_not_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Other packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
-            print(other_not_dst, end="\r\n")
-            t -= 1
+        other_not_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Other packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
+        print(other_not_dst, end="\r")
 
     if IP in packet.layers():
         if packet.getlayer(IP).dst != NetFucker.Vars.blocked_host:

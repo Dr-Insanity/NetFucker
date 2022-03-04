@@ -7,10 +7,13 @@ import time
 from guizero import App, Text, TextBox
 import random
 import socket
+import netifaces
+import netfilterqueue
 
 init()
 
 class NetFucker:
+
 
     class Stealth:
         def ARPScan(target_ip: str, blocked_host: str):
@@ -70,6 +73,24 @@ $R@i.~~ !     :   ~$$$$$B$$en:``              ██║ ╚████║██
             """ + Fore.LIGHTGREEN_EX + """
 We DGAF about your internet connection. We own it.""")
             return True # It went through fine. Quit this function
+    class PacketMonitor:
+        not_dst = 0
+        dst = 0
+        other_pkts_not_dst = 0
+        total_pkts = 0
+
+        is_active = False
+        app = App(title="Packet Monitor")
+        app.hide()
+        pack_other_dst             = Text(app, text="Packets with other destinations:")
+        pack_other_dst_value       = TextBox(app, enabled=False, text=f"{not_dst}")
+        pack_to_dst                = Text(app, text="Packets to blocked host:")
+        pack_to_dst_value          = TextBox(app, enabled=False, text=f"{dst}")
+        other_pkts_other_dst       = Text(app, text="Other packets with other destinations:")
+        other_pkts_other_dst_value = TextBox(app, enabled=False, text=f"{other_pkts_not_dst}")
+        def initiate_Monitor():
+            NetFucker.PacketMonitor.app.display()
+
     class Vars:
         blocked_host = f""
         target_ip = f""
@@ -85,38 +106,23 @@ We DGAF about your internet connection. We own it.""")
                 return "157.240.201.15"
 
 def monitor_target_(packet: scapy.packet.Packet):
-    not_dst = 0
-    dst = 0
-    other_pkts_not_dst = 0
-    app = App(title="Packet Monitor")
     if not NetFucker.Vars.found:
         NetFucker.Vars.found       = True
-        pack_other_dst             = Text(app, text="Packets with other destinations:")
-        pack_other_dst_value       = TextBox(app, enabled=False, text=f"{not_dst}")
-        pack_to_dst                = Text(app, text="Packets to blocked host:")
-        pack_to_dst_value          = TextBox(app, enabled=False, text=f"{dst}")
-        other_pkts_other_dst       = Text(app, text="Other packets with other destinations:")
-        other_pkts_other_dst_value = TextBox(app, enabled=False, text=f"{other_pkts_not_dst}")
-        app.display()
+        NetFucker.PacketMonitor.initiate_Monitor()
 
     if IP in packet.layers():
         if packet.getlayer(IP).dst != NetFucker.Vars.blocked_host:
-            not_dst += 1
-            print(len(app.children))
-            app.children[2].clear()
-            app.children[2].append(f"{not_dst}")
+            NetFucker.PacketMonitor.not_dst += 1
+            NetFucker.PacketMonitor.pack_other_dst_value.clear()
+            NetFucker.PacketMonitor.pack_other_dst_value.append(f"{NetFucker.PacketMonitor.not_dst}")
         else:
-            dst += 1
-            print(len(app.children))
-            app.children[4].clear()
-            app.children[4].append(f"{dst}")
-
+            NetFucker.PacketMonitor.dst += 1
+            NetFucker.PacketMonitor.pack_to_dst_value.clear()
+            NetFucker.PacketMonitor.pack_to_dst_value.append(f"{NetFucker.PacketMonitor.dst}")
     else:
-        other_pkts_not_dst += 1
-        print(len(app.children))
-        app.children[6].clear()
-        app.children[6].append(f"{dst}")
-            
+        NetFucker.PacketMonitor.other_pkts_not_dst += 1
+        NetFucker.PacketMonitor.other_pkts_other_dst_value.clear()
+        NetFucker.PacketMonitor.other_pkts_other_dst_value.append(f"{NetFucker.PacketMonitor.dst}")
     return
 
 def NeTfUcKeR():
