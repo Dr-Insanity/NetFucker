@@ -84,44 +84,38 @@ We DGAF about your internet connection. We own it.""")
             def IPs():
                 return "157.240.201.15"
 
-def monitor_target_traffic(packet: scapy.packet.Packet):
+def monitor_target_(packet: scapy.packet.Packet):
     not_dst = 0
     dst = 0
     other_pkts_not_dst = 0
-    #if not NetFucker.Vars.found:
-    #    NetFucker.Vars.found = True
-    #    app = App(title="Packet Monitor")
-    #    message = Text(app, text="Enter your name")
-    #    app.display()
-    def count_non_dst(t):
-        while t:
-            non_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
-            print(non_dst, end="\r\n")
-            t -= 1
-
-    def count_dst(t):
-        while t:
-            is_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Packets to blocked host: " + Fore.GREEN + "{:02d}".format(t)
-            print(is_dst, end="\r\n")
-            t -= 1
-
-    def count_other_not_dst(t):
-        while t:
-            other_not_dst = NeTfUcKeR()+NetFucker.Appearance.hey()+ Fore.WHITE + " Other packets with other destinations: " + Fore.GREEN + "{:02d}".format(t)
-            print(other_not_dst, end="\r\n")
-            t -= 1
+    app = App(title="Packet Monitor")
+    if not NetFucker.Vars.found:
+        NetFucker.Vars.found       = True
+        pack_other_dst             = Text(app, text="Packets with other destinations:")
+        pack_other_dst_value       = TextBox(app, enabled=False, text=f"{not_dst}")
+        pack_to_dst                = Text(app, text="Packets to blocked host:")
+        pack_to_dst_value          = TextBox(app, enabled=False, text=f"{dst}")
+        other_pkts_other_dst       = Text(app, text="Other packets with other destinations:")
+        other_pkts_other_dst_value = TextBox(app, enabled=False, text=f"{other_pkts_not_dst}")
+        app.display()
 
     if IP in packet.layers():
         if packet.getlayer(IP).dst != NetFucker.Vars.blocked_host:
             not_dst += 1
-            count_non_dst(not_dst)
+            print(len(app.children))
+            app.children[2].clear()
+            app.children[2].append(f"{not_dst}")
         else:
             dst += 1
-            count_dst(dst)
+            print(len(app.children))
+            app.children[4].clear()
+            app.children[4].append(f"{dst}")
 
     else:
         other_pkts_not_dst += 1
-        count_other_not_dst(other_pkts_not_dst)
+        print(len(app.children))
+        app.children[6].clear()
+        app.children[6].append(f"{dst}")
             
     return
 
@@ -158,7 +152,7 @@ def main():
 
 def main2(target_ip: str, blocked_host: str):
     print(f"{NeTfUcKeR()}{NetFucker.Appearance.hey()} Checking if given target IPv4 is currently giving away their existence. Please wait...\n{NeTfUcKeR()}{NetFucker.Appearance.hey()} This may take a while...")
-    hmm = sniff(prn=monitor_target_traffic, filter=f"src host {target_ip}")
+    hmm = sniff(prn=monitor_target_, filter=f"src host {target_ip}")
     #print(hmm.summary())
     #print(hmm[0].layers())
 
