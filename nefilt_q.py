@@ -186,10 +186,10 @@ class InternetControl:
 
 
 if __name__ == '__main__':
-    Appearance.printBanner()
     if not has_root():
         print(colored(F"{NeTfUcKeR()}{Appearance.wut()} Please run as Root... Quitting!!", "red"))
         sys.exit(1)
+    Appearance.printBanner()
     print(colored(f"{NeTfUcKeR()}{Appearance.hey()} Running as Root", "green"))
     gateway_ip = gateway_address()
     print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Gateway IP: {}".format(gateway_ip), "red"))
