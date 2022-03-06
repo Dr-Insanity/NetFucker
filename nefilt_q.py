@@ -167,7 +167,7 @@ class InternetControl:
         self.targets.append(target)
 
     def deny(self, threaded=True):
-        subprocess.call(["iptables", "-I", "FORWARD", "-j", "NFQUEUE", "--queue-num", "0"])
+        subprocess.call(["iptables", "-I", "FORWARD", "-j", "NFQUEUE", "--queue-num", "1"])
         queue = netfilterqueue.NetfilterQueue()
         queue.bind(0, lambda packet: packet.drop())
         for target in self.targets:
