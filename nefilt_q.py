@@ -155,6 +155,7 @@ class Configuration:
         config.read('./Configuration/config.ini')
         return True
     def get_IP_Range():
+        Configuration.read_config()
         ip_range = config["DEFAULT"]["ip_range"]
         return ip_range
 
