@@ -3,6 +3,7 @@ import os
 import subprocess
 import netifaces
 import netfilterqueue
+from configparser import ConfigParser
 import threading
 import sys
 import time
@@ -10,6 +11,21 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 
 init()
+
+config = ConfigParser(allow_no_value=False, default_section="DEFAULT")
+
+def NeTfUcKeR():
+    return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
+
+def print_DiscoveringStage():
+    print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " D " + Fore.RED + "I " + Fore.YELLOW + "S " + Fore.LIGHTGREEN_EX + "C " + Fore.MAGENTA + "O " + Fore.CYAN + "V " + Fore.BLUE + "E " + Fore.RED + "R " + Fore.YELLOW + "Y    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
+
+def print_AttackingStage():
+    print("\n" + Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " A " + Fore.RED + "T " + Fore.YELLOW + "T " + Fore.LIGHTGREEN_EX + "A " + Fore.MAGENTA + "C " + Fore.CYAN + "K " + Fore.BLUE + "I " + Fore.RED + "N " + Fore.YELLOW + "G    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================", end="\r")
+
+def print_Important():
+    print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " I " + Fore.RED + "M " + Fore.YELLOW + "P " + Fore.LIGHTGREEN_EX + "O " + Fore.MAGENTA + "R " + Fore.CYAN + "T " + Fore.BLUE + "A " + Fore.RED + "N " + Fore.YELLOW + "T " + Fore.GREEN + "]" + Fore.GREEN + "==================")
+
 
 class Appearance:
     def wut():
@@ -125,15 +141,22 @@ def prompt_for_targets(clients):
             ip_addr=client["ip"],
             mac_addr=client["mac"]
         )
-        print(colored(info, "cyan"))
+        print(colored(info, "grey"))
 
-    indices = input(colored("NetCut>", "red", attrs=["bold"]))
+    indices = input(colored(f"{NeTfUcKeR()} Pick a target by it's number on the left> ", "red", attrs=["bold"]))
     if not indices:
         return []
     indices = map(int, indices.split(","))
     targets = [clients[index-1] for index in indices]
     return targets
 
+class Configuration:
+    def read_config():
+        config.read('./Configuration/config.ini')
+        return True
+    def get_IP_Range():
+        ip_range = config["DEFAULT"]["ip_range"]
+        return ip_range
 
 class InternetControl:
     def __init__(self):
@@ -162,20 +185,21 @@ class InternetControl:
 
 
 if __name__ == '__main__':
+    Appearance.printBanner()
     if not has_root():
-        print(colored("[-] Please run as Root... Quitting!!", "red"))
+        print(colored(F"{NeTfUcKeR()}{Appearance.wut()} Please run as Root... Quitting!!", "red"))
         sys.exit(1)
-    print(colored("[+] Running as Root", "green"))
+    print(colored(f"{NeTfUcKeR()}{Appearance.hey()} Running as Root", "green"))
     gateway_ip = gateway_address()
-    print(colored("[+] Gateway IP: {}".format(gateway_ip), "red"))
-
-    ip_range = "172.16.0.0/24"
+    print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Gateway IP: {}".format(gateway_ip), "red"))
+    
+    ip_range = Configuration.get_IP_Range()
     clients = connected_clients(gateway_ip, ip_range)
     gateway = clients[0]
     targets = prompt_for_targets(clients[1:])
     network = InternetControl()
     for target in targets:
-        print(colored("[+] Spoofing Target: {}", "green").format(target["ip"]))
+        print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Spoofing Target: {}", "green").format(target["ip"]))
         network.add_target(ARPSpoof(target, ip_range, gateway))
     try:
         network.deny(threaded=False)

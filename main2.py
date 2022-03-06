@@ -7,8 +7,6 @@ import time
 from guizero import App, Text, TextBox
 import random
 import socket
-import netifaces
-import netfilterqueue
 
 init()
 
