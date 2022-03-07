@@ -23,7 +23,6 @@ class Appearance:
         """#### Prefix for printed lines in common CLI-based apps\n\naka [INFO] for common CLI-apps"""
         return Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]"
 
-platf = f""
 class current_platform:
 
     def determine_platform():
@@ -41,7 +40,6 @@ class current_platform:
             quit()
         elif not "windows" in platform.platform().lower():
             print(f"""{Appearance.NeTfUcKeR()}{Appearance.hey()} Your platform is "{platform.platform()}" """)
-            platf += "linux"
             return True
 
 
