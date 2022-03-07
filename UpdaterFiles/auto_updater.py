@@ -2,8 +2,6 @@ from colorama import init, Fore, Back, Style
 from subprocess import check_output
 import platform
 
-plat = f""
-
 class Appearance:
 
     def NeTfUcKeR():
@@ -25,6 +23,7 @@ class Appearance:
         """#### Prefix for printed lines in common CLI-based apps\n\naka [INFO] for common CLI-apps"""
         return Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]"
 
+plat = f""
 class current_platform:
     def determine_platform():
         """Checks what platform you're on.
@@ -44,7 +43,7 @@ class current_platform:
             plat += "linux"
             return True
     def is_unix():
-        """returns `True` if user is not on Windows Operating System
+        """returns `True` if user is not on Windows Operating System, else `False` and quits.
         #### It requires no parameters
         """
         if plat == "linux":
