@@ -40,6 +40,7 @@ class current_platform:
             print(f"{Appearance.NeTfUcKeR()}{Appearance.hey()} Quitting. Goodbye. :(")
             quit()
         elif not "windows" in platform.platform().lower():
+            call(['clear'])
             print(f"""{Appearance.NeTfUcKeR()}{Appearance.hey()} Your platform is "{platform.platform()}" """)
             return True
 
