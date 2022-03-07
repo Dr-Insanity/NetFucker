@@ -58,6 +58,3 @@ class Updater:
         """##### Updates the scapy dependency, if needed."""
         out = call(["python3", "-m", "pip", "install", "scapy", "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
         print(out)
-
-current_platform.determine_platform()
-Updater.update_scapy()
