@@ -47,7 +47,7 @@ class current_platform:
 class Updater:
     """Class containing methods for updating components for NetFucker"""
 
-    def updater_():
+    def updater_tag():
         return colored(Fore.WHITE + "[" + Fore.BLUE + "UPDATER" + Fore.WHITE + "]", attrs="bold")
 
     def updating():
