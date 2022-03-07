@@ -143,7 +143,7 @@ def prompt_for_targets(clients):
         )
         print(Fore.LIGHTWHITE_EX + info)
     print(Fore.RED + "Pick a target by it's number on the left")
-    indices = input(colored(f"{NeTfUcKeR()}>", attrs=["bold"]))
+    indices = input(colored(f"{NeTfUcKeR()[1:9:]}>", attrs=["bold"]))
     if not indices:
         return []
     indices = map(int, indices.split(","))
