@@ -48,7 +48,7 @@ class Updater:
     """Class containing methods for updating components for NetFucker"""
 
     def updater_tag():
-        return colored(Fore.WHITE + "[" + Fore.BLUE + "UPDATER" + Fore.WHITE + "]", attrs="bold")
+        return Fore.WHITE + "[" + Fore.BLUE + "UPDATER" + Fore.WHITE + "]"
 
     def updating():
         print(f"{Appearance.NeTfUcKeR()}{Appearance.hey()}{Updater.updater_tag()} enforcing the installation of updates for required components of {Appearance.NeTfUcKeRNo_Tag()}")
