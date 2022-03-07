@@ -222,5 +222,6 @@ try:
             network.restore()
 
 except KeyboardInterrupt:
+    import subprocess
     subprocess.call(["iptables", "--flush"])
     quit()
