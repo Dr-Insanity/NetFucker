@@ -51,10 +51,18 @@ class Updater:
         return Fore.WHITE + "[" + Fore.BLUE + "UPDATER" + Fore.WHITE + "]"
 
     def updating():
-        print(f"{Appearance.NeTfUcKeR()}{Appearance.hey()}{Updater.updater_tag()} enforcing the installation of updates for required components of {Appearance.NeTfUcKeRNo_Tag()}")
+        print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()} enforcing the installation of updates for required components of {Appearance.NeTfUcKeRNo_Tag()}")
         return
 
-    def update_scapy():
-        """##### Updates the scapy dependency, if needed."""
-        out = call(["python3", "-m", "pip", "install", "scapy", "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
-        print(out)
+    def update_lib(pip_name: str):
+        """Attempts to update the given dependency
+        ### Parameters? Yes please
+        - `pip_name`[str] -> a lib name of a pip-installable python module
+        """
+        out = call(["python3", "-m", "pip", "install", pip_name, "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
+        if out == 0:
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"{pip_name} already up-to-date", "green", attrs=["bold"]))
+        elif out == 1:
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"{pip_name} is now updated", "green", attrs=["bold"]))
+        else:
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.wut()}" + colored(f"Error while updating {pip_name}. Try manually with pip", "red", attrs=["bold"]))

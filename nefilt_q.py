@@ -1,7 +1,11 @@
 from UpdaterFiles.auto_updater import current_platform, Updater
 current_platform.determine_platform()
 Updater.updating()
-Updater.update_scapy()
+Updater.update_lib("scapy")
+Updater.update_lib("netifaces")
+Updater.update_lib("netfilterqueue")
+Updater.update_lib("colorama")
+Updater.update_lib("termcolor")
 import scapy.all as scapy
 import os
 import subprocess
