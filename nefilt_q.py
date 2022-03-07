@@ -222,5 +222,5 @@ try:
             network.restore()
 
 except KeyboardInterrupt:
-    InternetControl.restore()
+    subprocess.call(["iptables", "--flush"])
     quit()
