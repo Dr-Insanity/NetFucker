@@ -47,7 +47,7 @@ class Updater:
     """Class containing methods for updating components for NetFucker"""
     def update_scapy():
         """##### Updates the scapy dependency, if needed."""
-        out = check_output(["python3", "pip", "install", "scapy", "--upgrade"])
+        out = check_output(["pip", "install", "scapy", "--upgrade"], executable="python3")
         print(out.decode()) 
 
 current_platform.determine_platform()
