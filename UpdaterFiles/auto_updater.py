@@ -1,5 +1,5 @@
 from colorama import init, Fore, Back, Style
-from subprocess import call
+from subprocess import call, DEVNULL
 import platform
 
 class Appearance:
@@ -47,8 +47,8 @@ class Updater:
     """Class containing methods for updating components for NetFucker"""
     def update_scapy():
         """##### Updates the scapy dependency, if needed."""
-        out = call(["python3", "-m", "pip", "install", "scapy", "--upgrade"], shell=False)
-        print(out.from_bytes()) 
+        out = call(["python3", "-m", "pip", "install", "scapy", "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
+        print(out)
 
 current_platform.determine_platform()
 Updater.update_scapy()
