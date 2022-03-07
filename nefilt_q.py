@@ -203,7 +203,7 @@ We DGAF about your internet connection. We own it.""")
             sys.exit(1)
         Appearance.printBanner()
         print(colored(f"{NeTfUcKeR()}{Appearance.hey()} Running as Root", "green"))
-        input(f"{NeTfUcKeR()}{Appearance.huh()}" + colored("Press ENTER to continue...", "green"), attrs=["bold"])
+        input(f"{NeTfUcKeR()}{Appearance.huh()} Press ENTER to continue...")
         gateway_ip = gateway_address()
         print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Gateway IP: {}".format(gateway_ip), "red"))
         
