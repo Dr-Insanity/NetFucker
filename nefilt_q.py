@@ -1,3 +1,6 @@
+from UpdaterFiles.auto_updater import current_platform
+current_platform.determine_platform()
+
 import scapy.all as scapy
 import os
 import subprocess
