@@ -141,9 +141,9 @@ def prompt_for_targets(clients):
             ip_addr=client["ip"],
             mac_addr=client["mac"]
         )
-        print(colored(info, "grey"))
-
-    indices = input(colored(f"{NeTfUcKeR()} Pick a target by it's number on the left> ", "red", attrs=["bold"]))
+        print(Fore.LIGHTWHITE_EX + info)
+    print(Fore.RED + "Pick a target by it's number on the left")
+    indices = input(colored(f"{NeTfUcKeR()}>", attrs=["bold"]))
     if not indices:
         return []
     indices = map(int, indices.split(","))

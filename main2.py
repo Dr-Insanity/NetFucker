@@ -12,7 +12,6 @@ init()
 
 class NetFucker:
 
-
     class Stealth:
         def ARPScan(target_ip: str, blocked_host: str):
             def countdown(t: int):
