@@ -7,7 +7,7 @@ plat = f""
 class Appearance:
 
     def NeTfUcKeR():
-        """#### Prefix for printed lines in common CLI-based apps\n\nFancy prefix for NetFucker as it's first prefix before anything else is printed, except for some stuff\n\n It looks like ![this](itp://ExampleImages/ExampleOfNetFuckerFancyPREFIX.png)"""
+        """#### Prefix for printed lines in common CLI-based apps\n\nFancy prefix for NetFucker as it's first prefix before anything else is printed, except for some stuff"""
         return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
 
     def NeTfUcKeRNo_Tag():
@@ -58,6 +58,8 @@ class Updater:
         if current_platform.is_unix:
             out = check_output("python3 -m pip install scapy --upgrade")
             print(out.decode())
+        else:
+            quit()
 
 current_platform.determine_platform()
 Updater.update_scapy()
