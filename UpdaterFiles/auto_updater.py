@@ -23,8 +23,9 @@ class Appearance:
         """#### Prefix for printed lines in common CLI-based apps\n\naka [INFO] for common CLI-apps"""
         return Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]"
 
-plat = f""
+platf = f""
 class current_platform:
+
     def determine_platform():
         """Checks what platform you're on.
         ### if it's Windows
@@ -40,25 +41,16 @@ class current_platform:
             quit()
         elif not "windows" in platform.platform().lower():
             print(f"""{Appearance.NeTfUcKeR()}{Appearance.hey()} Your platform is "{platform.platform()}" """)
-            plat += "linux"
+            platf += "linux"
             return True
-    def is_unix():
-        """returns `True` if user is not on Windows Operating System, else `False` and quits.
-        #### It requires no parameters
-        """
-        if plat == "linux":
-            return True
-        return False
+
 
 class Updater:
     """Class containing methods for updating components for NetFucker"""
     def update_scapy():
         """##### Updates the scapy dependency, if needed."""
-        if current_platform.is_unix:
-            out = check_output("python3 -m pip install scapy --upgrade")
-            print(out.decode())
-        else:
-            quit()
+        out = check_output("python3 -m pip install scapy --upgrade")
+        print(out.decode())
 
 current_platform.determine_platform()
 Updater.update_scapy()
