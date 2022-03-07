@@ -17,6 +17,9 @@ config = ConfigParser(allow_no_value=False, default_section="DEFAULT")
 def NeTfUcKeR():
     return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
 
+def NeTfUcKeRNo_Tag():
+    return Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + ""
+
 def print_DiscoveringStage():
     print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " D " + Fore.RED + "I " + Fore.YELLOW + "S " + Fore.LIGHTGREEN_EX + "C " + Fore.MAGENTA + "O " + Fore.CYAN + "V " + Fore.BLUE + "E " + Fore.RED + "R " + Fore.YELLOW + "Y    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
 
@@ -143,7 +146,7 @@ def prompt_for_targets(clients):
         )
         print(Fore.LIGHTWHITE_EX + info)
     print(Fore.RED + "Pick a target by it's number on the left")
-    indices = input(colored(f"{NeTfUcKeR()[1:9:]}>", attrs=["bold"]))
+    indices = input(colored(f"{NeTfUcKeRNo_Tag()}>", attrs=["bold"]))
     if not indices:
         return []
     indices = map(int, indices.split(","))
