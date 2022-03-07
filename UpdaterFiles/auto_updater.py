@@ -1,6 +1,7 @@
 from colorama import init, Fore, Back, Style
 from subprocess import call, DEVNULL
 import platform
+from termcolor import colored
 
 class Appearance:
 
@@ -45,6 +46,14 @@ class current_platform:
 
 class Updater:
     """Class containing methods for updating components for NetFucker"""
+
+    def updater_():
+        return colored(Fore.WHITE + "[" + Fore.BLUE + "UPDATER" + Fore.WHITE + "]", attrs="bold")
+
+    def updating():
+        print(f"{Appearance.NeTfUcKeR()}{Appearance.hey()}{Updater.updater_tag()} enforcing the installation of updates for required components of {Appearance.NeTfUcKeRNo_Tag()}")
+        return
+
     def update_scapy():
         """##### Updates the scapy dependency, if needed."""
         out = call(["python3", "-m", "pip", "install", "scapy", "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
