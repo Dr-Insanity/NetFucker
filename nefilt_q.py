@@ -223,7 +223,7 @@ try:
 
 except KeyboardInterrupt:
     import subprocess
-    from coloroma import Fore
+    from colorama import Fore
     print(Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]" + Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]" + "Control-C press detected. Exitting!")
     subprocess.call(["iptables", "--flush"])
     quit()
