@@ -17,8 +17,8 @@ The rest is pretty much auto-installed.
 Clone this repository & CD into it.
 
 ```bash
-$git clone https://github.com/Dr-Insanity/NetFucker.git
-$cd NetFucker
+git clone https://github.com/Dr-Insanity/NetFucker.git
+cd NetFucker
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ ip_range = 192.168.0.0/24
 ```
 Once that's done, you may execute
 ```bash
-$sudo python3 nefilt_q.py
+sudo python3 nefilt_q.py
 ```
 
 That is really required to be run as root, because:
