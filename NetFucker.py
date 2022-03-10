@@ -228,9 +228,6 @@ We DGAF about your internet connection. We own it.""")
             if open_nano.lower() in ["yes", "y"]:
                 out = subprocess.call(["nano", "./Configuration/config.ini"])
                 if out == 0:
-                    print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"You have brought no change... exitting...", "red", attrs=["bold"]))
-                    quit()
-                elif out == 1:
                     print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"IP Range updated", "green", attrs=["bold"]))
                     print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"Relaunching {NeTfUcKeRNo_Tag()} :D", "green", attrs=["bold"]))
                     time.sleep(2) # give a moment to let the user know what will happen.
