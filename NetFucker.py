@@ -7,6 +7,7 @@ try:
     Updater.update_lib("netfilterqueue")
     Updater.update_lib("colorama")
     Updater.update_lib("termcolor")
+    Updater.update_lib("keyboard")
     import scapy.all as scapy
     import os
     import subprocess
