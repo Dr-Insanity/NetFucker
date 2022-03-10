@@ -79,11 +79,11 @@ class Updater:
         """
         out = call(["python3", "-m", "pip", "install", pip_name, "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
         if out == 0:
-            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"{pip_name} already up-to-date", "green", attrs=["bold"]))
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()} " + colored(f"{pip_name} already up-to-date", "green", attrs=["bold"]))
         elif out == 1:
-            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"{pip_name} is now updated", "green", attrs=["bold"]))
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()} " + colored(f"{pip_name} is now updated", "green", attrs=["bold"]))
         else:
-            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.wut()}" + colored(f"Error while updating {pip_name}. Try manually with pip", "red", attrs=["bold"]))
+            print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.wut()} " + colored(f"Error while updating {pip_name}. Try manually with pip", "red", attrs=["bold"]))
 
     def install_lib(pip_name: str):
         """Attempts to install the given dependency
