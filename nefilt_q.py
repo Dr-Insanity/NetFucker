@@ -225,7 +225,7 @@ We DGAF about your internet connection. We own it.""")
         except IndexError:
             open_nano = input(f"""{NeTfUcKeR()}{Appearance.wut()} invalid IP range?\nOpen NANO CLI-Based text editor to rectify "./Configuration/config.ini"? ("""+Fore.LIGHTGREEN_EX+"Y"+Fore.WHITE+"/"+Fore.RED+"N"+Fore.WHITE+") > ")
             if open_nano.lower() in ["yes", "y"]:
-                out = call(["nano", ".\Configuration\config.ini"])
+                out = subprocess.call(["nano", ".\Configuration\config.ini"])
                 if out == 0:
                     print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"You have brought no change... exitting...", "red", attrs=["bold"]))
                     quit()
