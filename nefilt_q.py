@@ -209,18 +209,22 @@ We DGAF about your internet connection. We own it.""")
         
         ip_range = Configuration.get_IP_Range()
         clients = connected_clients(gateway_ip, ip_range)
-        gateway = clients[0]
-        targets = prompt_for_targets(clients[1:])
-        network = InternetControl()
-        for target in targets:
-            print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Spoofing Target: {}", "green").format(target["ip"]))
-            network.add_target(ARPSpoof(target, ip_range, gateway))
         try:
-            network.deny(threaded=False)
-        except KeyboardInterrupt:
-            pass
-        finally:
-            network.restore()
+            gateway = clients[0]
+            targets = prompt_for_targets(clients[1:])
+            network = InternetControl()
+            for target in targets:
+                print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(" Spoofing Target: {}", "green").format(target["ip"]))
+                network.add_target(ARPSpoof(target, ip_range, gateway))
+            try:
+                network.deny(threaded=False)
+            except KeyboardInterrupt:
+                pass
+            finally:
+                network.restore()
+        except IndexError:
+            print(f"{NeTfUcKeR()}{Appearance.wut()} invalid IP range? Check ./Configuration/config.ini")
+            quit()
 
 except KeyboardInterrupt:
     import subprocess
