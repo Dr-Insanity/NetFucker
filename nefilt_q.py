@@ -225,7 +225,7 @@ We DGAF about your internet connection. We own it.""")
         except IndexError:
             open_nano = input(f"""{NeTfUcKeR()}{Appearance.wut()} invalid IP range?\nOpen NANO CLI-Based text editor to rectify "./Configuration/config.ini"? ("""+Fore.LIGHTGREEN_EX+"Y"+Fore.WHITE+"/"+Fore.RED+"N"+Fore.WHITE+") > ")
             if open_nano.lower() in ["yes", "y"]:
-                out = subprocess.call(["nano", ".\Configuration\config.ini"])
+                out = subprocess.call(["nano", "./Configuration/config.ini"])
                 if out == 0:
                     print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"You have brought no change... exitting...", "red", attrs=["bold"]))
                     quit()
@@ -235,9 +235,9 @@ We DGAF about your internet connection. We own it.""")
                     time.sleep(2) # give a moment to let the user know what will happen.
                     os.execv(sys.executable, ["python3", __file__])
                 else:
-                    print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.wut()}" + colored(f"Some error occured... Try manually with editting it with some text editor", "red", attrs=["bold"]))
+                    print(f"{NeTfUcKeR()}{Appearance.wut()}" + colored(f"Some error occured... Try manually with editting it with some text editor", "red", attrs=["bold"]))
             elif open_nano.lower() in ["no", "n"]:
-                print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()}" + colored(f"Very well. But you will need to edit the IP range regardlessly with some other text editor.\nExitting application.", "red", attrs=["bold"]))
+                print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"Very well. But you will need to edit the IP range regardlessly with some other text editor.\nExitting application.", "red", attrs=["bold"]))
                 quit()
             else:
                 print(f"{NeTfUcKeR()}{Appearance.wut()} ïncorrect reply... Quitting...")
