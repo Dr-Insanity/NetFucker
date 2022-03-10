@@ -223,7 +223,7 @@ We DGAF about your internet connection. We own it.""")
             finally:
                 network.restore()
         except IndexError:
-            open_nano = (f"""{NeTfUcKeR()}{Appearance.wut()} invalid IP range?\nOpen NANO CLI-Based text editor to rectify "./Configuration/config.ini"? ("""+Fore.LIGHTGREEN_EX+"Y"+Fore.WHITE+"/"+Fore.RED+"N"+Fore.WHITE+") > ")
+            open_nano = input(f"""{NeTfUcKeR()}{Appearance.wut()} invalid IP range?\nOpen NANO CLI-Based text editor to rectify "./Configuration/config.ini"? ("""+Fore.LIGHTGREEN_EX+"Y"+Fore.WHITE+"/"+Fore.RED+"N"+Fore.WHITE+") > ")
             if open_nano.lower() in ["yes", "y"]:
                 out = call(["nano", ".\Configuration\config.ini"])
                 if out == 0:
