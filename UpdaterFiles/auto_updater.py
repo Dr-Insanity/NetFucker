@@ -1,26 +1,29 @@
 from subprocess import call, DEVNULL
 import platform
 
+def has_root():
+    from os import geteuid
+    return geteuid() == 0
+
 class Appearance:
 
     def NeTfUcKeR():
-        """#### Prefix for printed lines in common CLI-based apps\n\nFancy prefix for NetFucker as it's first prefix before anything else is printed, except for some stuff"""
-        return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
+        return "{}[{}N{}e{}t{}F{}u{}c{}K{}e{}r{}]".format(Fore.WHITE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
     def NeTfUcKeRNo_Tag():
-        return Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + ""
+        return "{}N{}e{}t{}F{}u{}c{}K{}e{}r{}".format(Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
     def wut():
         """#### Prefix for printed lines in common CLI-based apps\n\naka [ERROR] for common CLI-apps"""
-        return Fore.WHITE + "[" + Fore.RED + "!" + Fore.WHITE + "]"
+        return "{}[{}!{}]".format(Fore.WHITE,Fore.RED,Fore.WHITE)
 
     def huh():
         """#### Prefix for printed lines in common CLI-based apps\n\naka [PROMPT] for common CLI-apps"""
-        return Fore.WHITE + "[" + Fore.LIGHTBLUE_EX + "?" + Fore.WHITE + "]"
+        return "{}[{}?{}]".format(Fore.WHITE,Fore.LIGHTBLUE_EX,Fore.WHITE)
 
     def hey():
         """#### Prefix for printed lines in common CLI-based apps\n\naka [INFO] for common CLI-apps"""
-        return Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]"
+        return "{}[{}+{}]".format(Fore.WHITE,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
 class current_platform:
 
@@ -77,6 +80,9 @@ class Updater:
         ### Parameters? Yes please
         - `pip_name`[str] -> a lib name of a pip-installable python module
         """
+        if pip_name == "netfilterqueue":
+            print(f"""{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()} {Fore.YELLOW} Issuing command\n"sudo apt install libnfnetlink-dev libnetfilter-queue-dev"\nIt's a dependency required for the installation of the module {pip_name}.{Fore.RESET}""")
+            out = call(["apt", "install", "libnfnetlink-dev" "libnetfilter-queue-dev"], stdout=DEVNULL, stderr=DEVNULL)
         out = call(["python3", "-m", "pip", "install", pip_name, "--upgrade"], stdout=DEVNULL, stderr=DEVNULL)
         if out == 0:
             print(f"{Appearance.NeTfUcKeR()}{Updater.updater_tag()}{Appearance.hey()} " + colored(f"{pip_name} already up-to-date", "green", attrs=["bold"]))

